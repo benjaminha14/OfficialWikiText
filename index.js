@@ -120,7 +120,7 @@ http.createServer(function(request, response) {
 
 }).listen(process.env.PORT || 5000);
 
-console.log(process.env.PORT || 5000);
+console.log("Port: "+process.env.PORT || 5000);
 
 
 /*
