@@ -118,7 +118,7 @@ http.createServer(function(request, response) {
     
     response.end();
 
-}).listen(8082);
+}).listen(process.env.PORT || 8082);
 
 
 
