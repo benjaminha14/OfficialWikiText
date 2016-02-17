@@ -73,21 +73,73 @@ http.createServer(function(request, response) {
     /*
         takes input, web scrapes Wikipedia, and returns first paragraph of page
     */
+	var url = "";
 	
-	var url = "https://en.wikipedia.org/wiki/" + input;
+	/*
+	    checks to see if the input is NEWS, if so, it will make the url the news wikipedia page, if not, it will set the url ot the wikipedia page for the input
+	*/
+	if(input == "NEWS") {
+       
+       url = "https://en.wikipedia.org/wiki/Portal:Current_events";
+       console.log("news")
+    
+       
+    } else {
+       
+       url = "https://en.wikipedia.org/wiki/" + input;
+       console.log("input");
+    
+       
+    }
+	/*
+	    Wikipedia code
+	*/
+	
+	//var url = "https://en.wikipedia.org/wiki/" + input;
 	req(url, function(error, response, body) {
 	
 	var $ = cheerio.load(body);
 	var firstPar = "";
 	if (!error) {
 		
+		/*
+		    checks if input is HELLO and then replies with prewritten response
+		*/
 		if(input.toUpperCase() == "HELLO") {
+			
 			firstPar = "Hi, I'm WikiText. Thanks for stopping by. You can look anything you want up just by texting this number with whatever you want to know about. You should get a reply back in under 30 seconds unless our server is down. Try to type in nouns and single words or phrases. Text \"TIPS\" for more help";
 			console.log(firstPar);
 			reply = firstPar;
+		
+		/*
+		    checks if input is TIPS and then replies with prewritten response with help
+		*/
 		} else if (input.toUpperCase() == "TIPS") {
+			
 			firstPar = "In case your having trouble, try searching just nouns or phases. If that doesn't work, then take a look at your capitalization (i.e. Dj Khaled won't work, but DJ Khaled will) and if that, too doesn't work, try putting underscores (_) instead of spaces. If none of those work, then there is no wikipedia page for this topic.";
 			console.log(firstPar);
+		
+		/*
+		    if input was NEW, then it goes to the url and takes top 5 headlines
+		*/
+		} else if (input == "NEWS") {
+            
+            url = "https://en.wikipedia.org/wiki/Portal:Current_events";
+            firstPar = "" + 
+               $('#mw-content-text').find('ul').eq(1).find('li').eq(0) + "\n -" +  
+               $('#mw-content-text').find('ul').eq(1).find('li').eq(1) + "\n" +
+               $('#mw-content-text').find('ul').eq(1).find('li').eq(2) + "\n" +
+               $('#mw-content-text').find('ul').eq(1).find('li').eq(2) + "\n" +
+               $('#mw-content-text').find('ul').eq(1).find('li').eq(3) + "\n" +
+               $('#mw-content-text').find('ul').eq(1).find('li').eq(4);
+            firstPar = firstPar.replace(/<(?:.|\n)*?>/gm, '');
+            firstPar = firstPar.replace(/&quot;/g, "\"");
+            firstPar = firstPar.replace(/\[(?:.|\n)*?\]/g, "");
+            firstPar = firstPar.replace(/&apos;/g, "'");
+            firstPar = firstPar.replace(/&#xE9;/g, "é");
+            console.log(firstPar);
+         
+		    
 		} else {
 			
             if (!error) {
