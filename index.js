@@ -107,7 +107,7 @@ http.createServer(function(request, response) {
 		*/
 		if(input.toUpperCase() == "HELLO") {
 			
-			firstPar = "Hi, I'm WikiText. Thanks for stopping by. You can look anything you want up just by texting this number with whatever you want to know about. You should get a reply back in under 30 seconds unless our server is down. Try to type in nouns and single words or phrases. Text \"TIPS\" for more help";
+			firstPar = "Hi, I'm WikiText. Thanks for stopping by. You can look anything you want up just by texting this number with whatever you want to know about. You should get a reply back in under 30 seconds unless our server is down. Try to type in nouns and single words or phrases. Text \"TIPS\" for more help and \"COMMANDS\" for a short list of custom commands you can text";
 			console.log(firstPar);
 			reply = firstPar;
 		
@@ -122,13 +122,18 @@ http.createServer(function(request, response) {
 		/*
 		    if input was NEW, then it goes to the url and takes top 5 headlines
 		*/
-		} else if (input == "NEWS") {
+		} else if (input == "COMMANDS") {
+            
+            firstPar = "\"HELLO\" - introductory text \n \"TIPS\" - get some quick help \n \"NEWS\" - current events";
+            console.log(firstPar);
+         
+		    
+		}else if (input == "NEWS") {
             
             url = "https://en.wikipedia.org/wiki/Portal:Current_events";
             firstPar = "" + 
                $('#mw-content-text').find('ul').eq(1).find('li').eq(0) + "\n -" +  
                $('#mw-content-text').find('ul').eq(1).find('li').eq(1) + "\n" +
-               $('#mw-content-text').find('ul').eq(1).find('li').eq(2) + "\n" +
                $('#mw-content-text').find('ul').eq(1).find('li').eq(2) + "\n" +
                $('#mw-content-text').find('ul').eq(1).find('li').eq(3) + "\n" +
                $('#mw-content-text').find('ul').eq(1).find('li').eq(4);
