@@ -8,6 +8,13 @@ var numUsersSearched = 0;
 var client = new twilio.RestClient('ACf2830c92abe86227c9d89be45345bdc1', '8994c537a323c780a92af819a238c6db');
 var Firebase = require('firebase');
 var dataRef = new Firebase('https://wikitalk.firebaseio.com/');
+ref.authWithCustomToken("Bj5Y0lQBUp2M8NlJHXbDbxR2sCAyfNM8HOY4OwV1", function(error, authData) {
+	if (error) {
+		console.log("Firebase login Failed!", error);
+	} else {
+		console.log("Firebase login Succeeded!", authData);
+	}
+});
 var usersRef = dataRef.child("data");
 var globalInput = "";
 
