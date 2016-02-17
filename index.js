@@ -15,6 +15,8 @@ var globalInput = "";
 // Pass in parameters to the REST API using an object literal notation. The
 // REST client will handle authentication and response serialzation for you.
 http.createServer(function(request, response) {
+	console.log("GOT REQUEST AT \""+request.url+"\"");
+	
     response.writeHead(700, {
         "Content-Type": "text/bold"
     });
