@@ -118,10 +118,9 @@ http.createServer(function(request, response) {
     
     response.end();
 
-});//.listen(process.env.PORT || 5000);
+}).listen(process.env.PORT || 5000);
 
 console.log("Port: "+(process.env.PORT || 5000));
-console.log("Ending???");
 
 
 /*
